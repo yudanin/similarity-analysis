@@ -17,7 +17,7 @@ try:
     nlp = spacy.load("en_core_web_sm")
     print("Loaded spaCy model: en_core_web_sm\n")
 except OSError:
-    print("spaCy model not found. Please run: python -m spacy download en_core_web_sm")
+    print("spaCy model not found.")
 
 
 
@@ -124,7 +124,7 @@ def show_directed_label_graph(graph: nx.DiGraph, title: str = "Dependency Graph"
 
     # Draw dependency arrows FROM head TO dependent (excluding punctuation)
     for token in tokens:
-        if token.head != token and not token.head.is_punct:  # Not root and head is not punctuation
+        if token.head != token and not token.head.is_punct:  # No punctuation arrows
             # Make sure both head and dependent are in our filtered tokens
             if token.head.i in word_positions and token.i in word_positions:
                 head_x = word_positions[token.head.i]
@@ -373,7 +373,7 @@ def read_api_key(filename: str) -> str:
             raise ValueError(f"API key file '{filename}' is empty")
 
         if not api_key.startswith('sk-ant-'):
-            raise ValueError(f"Invalid API key format in '{filename}'. Should start with 'sk-ant-'")
+            raise ValueError(f"Invalid API key format in '{filename}'.")
 
         return api_key
 
